@@ -7,13 +7,37 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="src">
-      <UniqueIdentifier>{2e4cc981-5fc2-4017-9a41-c8bcd2b8087f}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
+    <ClInclude Include="src\Logger\CompositeLogger.h">
+      <Filter>src\Logger</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Logger\ConsoleLogger.h">
+      <Filter>src\Logger</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Logger\FileLogger.h">
+      <Filter>src\Logger</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Logger\ILogger.h">
+      <Filter>src\Logger</Filter>
+    </ClInclude>
     <ClInclude Include="src\DeviceInfo.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="src\Definitions\Definitions.h">
+      <Filter>src\Definitions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Definitions\HeaderFiles.h">
+      <Filter>src\Definitions</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{3f07b02d-7f34-44c1-ab7d-aa0ab9df77e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Logger">
+      <UniqueIdentifier>{53bfdb72-f116-4f2b-b541-4e82c061b51b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Definitions">
+      <UniqueIdentifier>{f4ebd783-5738-42bc-b09b-58215f1e0d52}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>
