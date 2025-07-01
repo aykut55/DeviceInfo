@@ -772,7 +772,8 @@ std::vector<std::map<std::wstring, std::wstring>> CDeviceInfo::QueryLogicalToPhy
             std::wstring dev = GetProperty(obj, L"DeviceID");
             std::wstring model = GetProperty(obj, L"Model");
             std::wstring serial = GetProperty(obj, L"SerialNumber");
-            driveMap[dev] = std::make_pair(model, serial);
+            //driveMap[dev] = std::make_pair(model, serial);
+            driveMap[NormalizeDeviceID(dev)] = std::make_pair(model, serial);
             obj->Release();
         }
 
@@ -837,7 +838,9 @@ std::vector<std::map<std::wstring, std::wstring>> CDeviceInfo::QueryLogicalToPhy
         std::map<std::wstring, std::wstring>::const_iterator itPM = partitionMap.find(partition);
         if (itPM != partitionMap.end()) {
             const std::wstring& deviceID = itPM->second;
-            std::map<std::wstring, std::pair<std::wstring, std::wstring> >::const_iterator itDrive = driveMap.find(deviceID);
+            const std::wstring normDeviceID = NormalizeDeviceID(deviceID);
+
+            std::map<std::wstring, std::pair<std::wstring, std::wstring> >::const_iterator itDrive = driveMap.find(normDeviceID);
 
             if (itDrive != driveMap.end()) {
                 const std::pair<std::wstring, std::wstring>& driveInfo = itDrive->second;
@@ -1362,6 +1365,7 @@ std::wstring CDeviceInfo::HardwareFingerprint2(bool useOsData, bool includeRegis
     }
 
     if (includeRegistryInfo) {
+        fingerprint += L"\t";
         auto regInfo = ReadSystemInformationRegistry();
         for (const auto& kv : regInfo) {
             fingerprint += kv.second;
@@ -1398,4 +1402,24 @@ std::map<std::wstring, std::wstring> CDeviceInfo::ReadSystemInformationRegistry(
     }
 
     return infoMap;
+}
+
+std::wstring CDeviceInfo::NormalizeDeviceID(const std::wstring& dev)
+{
+    std::wstring norm;
+    bool last_was_backslash = false;
+
+    for (size_t i = 0; i < dev.length(); ++i) {
+        if (dev[i] == L'\\') {
+            if (!last_was_backslash) {
+                norm += L'\\';
+                last_was_backslash = true;
+            }
+        }
+        else {
+            norm += dev[i];
+            last_was_backslash = false;
+        }
+    }
+    return norm;
 }

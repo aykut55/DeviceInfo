@@ -91,6 +91,7 @@ private:
     void FillWmiClassesList(void);
 
     std::wstring VariantToWString(const VARIANT& vt);
+    std::wstring NormalizeDeviceID(const std::wstring& dev);
 };
 
 #endif

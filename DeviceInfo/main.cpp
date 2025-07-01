@@ -71,7 +71,7 @@ int runExample_QueryLogicalToPhysicalDisks(std::auto_ptr<CDeviceInfo> pDeviceInf
 {
     auto diskMap = pDeviceInfo->QueryLogicalToPhysicalDisks();
 
-    std::wcout << L"\n[Volume → PhysicalDisk eşleşmesi]\n";
+    std::wcout << L"\n[Volume -> PhysicalDisk eslesmesi]\n";
     for (const auto& disk : diskMap) {
         std::wcout << L"Drive: " << disk.at(L"LogicalDrive") << L"\n";
         std::wcout << L"  Model: " << disk.at(L"Model") << L"\n";
@@ -251,8 +251,8 @@ int runExample14(std::auto_ptr<CDeviceInfo> pDeviceInfo)
     // Donanım + OS + Registry bilgileri
     std::wstring fp3 = pDeviceInfo->HardwareFingerprint2(true, true);
 
-    std::wcout << L"Fingerprint 1 (donanim): " << fp1 << std::endl;
-    std::wcout << L"Fingerprint 2 (donanim + OS): " << fp2 << std::endl;
+    std::wcout << L"Fingerprint 1 (donanim)           : " << fp1 << std::endl;
+    std::wcout << L"Fingerprint 2 (donanim + OS)      : " << fp2 << std::endl;
     std::wcout << L"Fingerprint 3 (donanim + OS + reg): " << fp3 << std::endl;
 
     return 1;
@@ -293,7 +293,7 @@ int main()
 
     //runExample3(pDeviceInfo);
 
-    //runExample_QueryLogicalToPhysicalDisks(pDeviceInfo);   // Bu calismiyor
+    //runExample_QueryLogicalToPhysicalDisks(pDeviceInfo);
     
     //runExample4(pDeviceInfo);
 
@@ -315,9 +315,9 @@ int main()
 
     //runExample13(pDeviceInfo);
 
-    //runExample14(pDeviceInfo);
+    runExample14(pDeviceInfo);  // lisanslama için kullanılabilecek metod
 
-    runExample15(pDeviceInfo);
+    //runExample15(pDeviceInfo);
 
     //pDeviceInfo->Cleanup();
 
