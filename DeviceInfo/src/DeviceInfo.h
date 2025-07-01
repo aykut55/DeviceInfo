@@ -31,6 +31,10 @@ public:
     int  RunExtended3(void);
     int  RunExtended4(const std::vector<std::pair<std::wstring, std::vector<std::wstring>>>& wmiClasses);
     int  RunExtended5(void);
+    int  RunExtended6(const std::vector<std::pair<std::wstring, std::vector<std::wstring>>>& wmiClasses);
+    int  RunExtended7(void);
+    int  RunExtended8(void);
+    int  Run9();
     int  Cleanup(void);
 
     std::map<std::wstring, std::wstring> QuerySingleItem(const std::wstring& className, const std::vector<std::wstring>& properties);
@@ -43,7 +47,26 @@ public:
     std::wstring GetProperty(IWbemClassObject* pObj, const wchar_t* propertyName);
 
     void Release(IWbemClassObject* pObj);
-    void Release(IEnumWbemClassObject* pObj);    
+    void Release(IEnumWbemClassObject* pObj); 
+
+
+    std::vector<std::map<std::wstring, std::wstring>> RunQueryAndPrint2(const std::wstring& className, const std::vector<std::wstring>& properties, std::wofstream& logFile);   // Bunun Kullanim ornegi yok, QueryMultiItem ile ayni
+
+    std::vector<std::map<std::wstring, std::wstring>> RunQueryAllProperties(const std::wstring& className, std::wofstream& logFile);
+    void RunVisualLayout();
+    std::wstring ConvertWmiDate(const std::wstring& wmiDate);
+
+
+    std::wstring GenerateHardwareId(bool useOsData = false);
+    std::wstring ComputeHash(const std::wstring& input);
+
+    std::wstring ReadMachineGuidFromRegistry();
+    std::wstring HardwareFingerprint(bool useOsData = false);
+
+    // En stabil fingerprint genellikle useOsData = false, includeRegistryInfo = true kombinasyonuyla elde edilir.
+    std::wstring HardwareFingerprint2(bool useOsData = false, bool includeRegistryInfo = false);
+
+    std::map<std::wstring, std::wstring> ReadSystemInformationRegistry();
 
 protected:
 
@@ -59,7 +82,7 @@ private:
     IWbemServices* pSvc = nullptr;
     IEnumWbemClassObject* ExecQuery(const std::wstring& wql);
     std::wstring GetProperty(IWbemClassObject* obj, const BSTR propName);
-    void RunQueryAndPrint(const std::wstring& className, const std::vector<std::wstring>& properties, std::wofstream& logFile);
+    void RunQueryAndPrint1(const std::wstring& className, const std::vector<std::wstring>& properties, std::wofstream& logFile);
     void RunQueryAndPrintExtended(const std::wstring& className, std::wofstream& logFile);
     void RunQueryAndPrintExtended2(const std::wstring& className, const std::vector<std::wstring>& properties, std::wofstream& logFile);
     void RunQueryAndPrintExtended3(const std::wstring& className, const std::vector<std::wstring>& properties, std::wofstream& logFile);
